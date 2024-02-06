@@ -1,5 +1,7 @@
 <template>
-  <demo></demo>
+  <div style="width: 100vw;height: 100vh;">
+    <demo></demo>
+  </div>
 </template>
 <script setup lang="ts">
 import demo from './Echarts/index.vue';

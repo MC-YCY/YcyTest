@@ -122,14 +122,15 @@ const versionChange = () => {
 
 <style lang="less" scoped>
 .container-main {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     position: relative;
 
     .container-main-codeView-content {
         flex: 1;
         height: 0px;
+        overflow: hidden;
     }
 
     .container-main-codeView-header {
