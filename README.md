@@ -1,8 +1,12 @@
 
-这是一个查看文档的仓库，使用vite-public-md解析.md文件作为路由页面
+这是一个编辑echarts的Demos
 - vite 5.x
 - node 20.11.0
 - vue3 + vite + ts
+
+> ![echarts](./public/readmeImages/Snipaste_2024-04-10_10-39-37.png)
+
+
 ```
 .
 ├── public
@@ -16,3 +20,4 @@
 > public/EchartsView iframe的页面
 
 > src/Echarts 主题页面
+
