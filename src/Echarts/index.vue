@@ -107,10 +107,10 @@ let versionOption = ref([]);
 const getVersionOption = () => {
     return getEchartsLibraries().then(res => {
         const data = res.data;
-        version.value = data.version;
         versionOption.value = data.versions.filter((v: string) => {
             return parseInt(v) >= 3
-        }).reverse()
+        }).reverse();
+        version.value = '5.5.0';
         versionChange()
     })
 }
