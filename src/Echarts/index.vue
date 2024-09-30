@@ -106,7 +106,7 @@ let version = ref();
 let versionOption = ref([]);
 const getVersionOption = () => {
     return getEchartsLibraries().then(res => {
-        const data = res.data;
+        const data = res.data.objects[0].package;
         versionOption.value = data.versions.filter((v: string) => {
             return parseInt(v) >= 3
         }).reverse();

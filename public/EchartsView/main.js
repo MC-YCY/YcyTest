@@ -19,7 +19,7 @@ const setVersionEchart = () => {
     document.body.removeChild(echartsjs);
     let script = document.createElement('script');
     script.setAttribute('id', 'echartsjs');
-    let cdn = `https://cdn.staticfile.org/echarts/${version}/echarts.min.js`
+    let cdn = `https://registry.npmmirror.com/echarts/${version}/files/dist/echarts.min.js`
     script.src = cdn;
     document.body.appendChild(script);
     script.onload = () => {
