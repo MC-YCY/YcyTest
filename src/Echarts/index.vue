@@ -16,8 +16,8 @@
                     <option :value="item" v-for="item in versionOption">{{ item }}</option>
                 </select>
             </div>
-            <div class="container-main-codeView-content" ref="frameContent">
-                <iframe :src="iframeSrc" id="Frame" class="container-main-view-frame"></iframe>
+            <div class="container-main-codeView-content">
+                <iframe :srcdoc="iframeCode" class="container-main-view-frame"></iframe>
             </div>
         </div>
     </div>
@@ -26,6 +26,7 @@
 import codeEditor from './components/codeEditor.vue';
 import { getEchartsLibraries } from './api/index';
 import { ref, onUnmounted } from 'vue';
+import {compoutedSrcDoc} from './srcdoc.ts';
 let MoveRef = ref();
 let MainRef = ref();
 let startDifMove = ref(0);
@@ -33,6 +34,7 @@ let isDrag = ref(false);
 let rCode = ref();
 let rView = ref();
 let iediter = ref();
+let iframeCode = ref();
 
 const mouseMove = (event: MouseEvent) => {
     let movex = event.clientX - startDifMove.value;
@@ -78,29 +80,13 @@ const visibilitychangeFun = () => {
 }
 document.addEventListener('visibilitychange', visibilitychangeFun)
 
-let frameContent = ref();
 const handleClickRun = () => {
-    let Frame_:HTMLElement | null = document.querySelector("#Frame");
-    frameContent.value.removeChild(Frame_);
-    let newFrame:HTMLIFrameElement | any = document.createElement('iframe');
-    newFrame.src = iframeSrc.value;
-    newFrame.setAttribute('class', 'container-main-view-frame')
-    newFrame.setAttribute('id', 'Frame')
-    frameContent.value.appendChild(newFrame);
-    newFrame.onload = () => {
-        let codes = iediter.value.getValue();
-        if (codes.trim()) {
-            newFrame.contentWindow.postMessage({ codes }, '*')
-        }
-    }
+  iframeCode.value = compoutedSrcDoc(version.value,iediter.value.getValue())
 }
 const handleInitCode = async () => {
     await getVersionOption()
     handleClickRun();
 }
-
-let baseSrc = `/EchartsView/frame.html`
-let iframeSrc = ref(baseSrc)
 
 let version = ref();
 let versionOption = ref([]);
@@ -115,7 +101,6 @@ const getVersionOption = () => {
     })
 }
 const versionChange = () => {
-    iframeSrc.value = baseSrc + '?version=' + version.value;
     handleClickRun();
 }
 </script>
